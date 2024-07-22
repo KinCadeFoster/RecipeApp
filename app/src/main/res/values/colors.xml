@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#E13E3E</color>
+    <color name="violet">#525DC0</color>
     <color name="background_color">#F4FAFF</color>
-    <color name="colorNavigationBar">#F4FAFF</color>
-    <color name="colorStatusBar">#F4FAFF</color>
+    <color name="colorBackground">#F4FAFF</color>
 </resources>

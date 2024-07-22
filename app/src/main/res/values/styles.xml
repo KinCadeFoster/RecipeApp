@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="StyleTitle14" parent="Widget.MaterialComponents.Button">
-        <item name="android:fontFamily">@font/montserrat_alternates_regular</item>
+        <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:fontWeight">600</item>
