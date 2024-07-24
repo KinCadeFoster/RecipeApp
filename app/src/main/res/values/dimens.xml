@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_horizontal">16dp</dimen>
-    <dimen name="margin_bottom">8dp</dimen>
+    <item name="common_8dp" type="dimen">8dp</item>
+    <item name="common_16dp" type="dimen">16dp</item>
+
+    <dimen name="margin_horizontal">@dimen/common_16dp</dimen>
+    <dimen name="margin_bottom">@dimen/common_8dp</dimen>
     <dimen name="button_margin">2dp</dimen>
 
     <dimen name="padding_vertical">10dp</dimen>
     <dimen name="padding_horizontal">0dp</dimen>
 
-    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="corner_radius">@dimen/common_8dp</dimen>
 
     <dimen name="text_size">14sp</dimen>
-    <dimen name="line_height">16sp</dimen>
-    <dimen name="font_weight">600</dimen>
 </resources>

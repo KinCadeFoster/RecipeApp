@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/main_background_color"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -24,18 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/StyleNavButton"
-            android:backgroundTint="@color/violet"
+            android:backgroundTint="@color/violet_color"
             android:text="@string/button_categories"
             android:layout_weight="1"
             android:layout_marginEnd="@dimen/button_margin" />
-
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_favorites"
             style="@style/StyleNavButton"
-            app:backgroundTint="@color/red"
+            app:backgroundTint="@color/red_color"
             app:icon="@drawable/ic_heart_empty"
             app:iconGravity="textEnd"
             android:layout_weight="1"

@@ -3,9 +3,7 @@
     <style name="StyleTitle14" parent="Widget.MaterialComponents.Button">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:fontWeight">@dimen/font_weight</item>
-        <item name="android:lineHeight">@dimen/line_height</item>
+        <item name="android:textColor">@color/white_color</item>
         <item name="textAllCaps">true</item>
     </style>
 
