@@ -11,7 +11,14 @@
         <item name="android:textAppearance">@style/StyleTitle14</item>
         <item name="android:paddingVertical">@dimen/padding_vertical</item>
         <item name="android:paddingHorizontal">@dimen/padding_horizontal</item>
-        <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="cornerRadius">@dimen/common_8dp</item>
     </style>
+
+    <style name="StyleFragmentContainerView">
+        <item name="android:layout_height">@dimen/common_0dp</item>
+        <item name="android:layout_width">@dimen/common_0dp</item>
+        <item name="android:layout_marginBottom">@dimen/common_8dp</item>
+    </style>
+
 
 </resources>

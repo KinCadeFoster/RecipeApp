@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="common_0dp" type="dimen">0dp</item>
     <item name="common_8dp" type="dimen">8dp</item>
     <item name="common_16dp" type="dimen">16dp</item>
 
@@ -9,8 +10,6 @@
 
     <dimen name="padding_vertical">10dp</dimen>
     <dimen name="padding_horizontal">0dp</dimen>
-
-    <dimen name="corner_radius">@dimen/common_8dp</dimen>
 
     <dimen name="text_size">14sp</dimen>
 </resources>
