@@ -1,16 +1,16 @@
 package ru.example.recipeapp
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import ru.example.recipeapp.databinding.FragmentListCategoriesBinding
+import ru.example.recipeapp.databinding.FragmentFavoritesBinding
 
 
-class CategoriesListFragment : Fragment() {
+class FavoritesFragment : Fragment() {
     private val binding by lazy {
-        FragmentListCategoriesBinding.inflate(layoutInflater)
+        FragmentFavoritesBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
