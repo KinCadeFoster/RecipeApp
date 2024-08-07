@@ -19,8 +19,4 @@ class CategoriesListFragment : Fragment() {
     ): View {
         return binding.root
     }
-
-    companion object {
-        fun newInstance() = FavoritesFragment()
-    }
 }

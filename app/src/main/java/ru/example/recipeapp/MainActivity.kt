@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import ru.example.recipeapp.databinding.ActivityMainBinding
 
 
@@ -26,17 +27,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bCategories.setOnClickListener {
-            replaceFragment(CategoriesListFragment())
+            replaceFragment<CategoriesListFragment>()
         }
 
         binding.bFavorites.setOnClickListener {
-            replaceFragment(FavoritesFragment())
+            replaceFragment<FavoritesFragment>()
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(binding.mainContainer.id, fragment)
-            .commit()
+    private inline fun <reified T : Fragment> replaceFragment() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<T>(binding.mainContainer.id)
+        }
     }
 }
