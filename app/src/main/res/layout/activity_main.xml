@@ -21,24 +21,26 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
+            android:id="@+id/bCategories"
+            style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/StyleNavButton"
-            android:backgroundTint="@color/violet_color"
-            android:text="@string/button_categories"
+            android:layout_marginEnd="@dimen/button_margin"
             android:layout_weight="1"
-            android:layout_marginEnd="@dimen/button_margin" />
+            android:backgroundTint="@color/violet_color"
+            android:text="@string/button_categories" />
 
         <Button
+            android:id="@+id/bFavorites"
+            style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/button_margin"
+            android:layout_weight="1"
             android:text="@string/button_favorites"
-            style="@style/StyleNavButton"
             app:backgroundTint="@color/red_color"
             app:icon="@drawable/ic_heart_empty"
-            app:iconGravity="textEnd"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/button_margin" />
+            app:iconGravity="textEnd" />
 
     </LinearLayout>
 
