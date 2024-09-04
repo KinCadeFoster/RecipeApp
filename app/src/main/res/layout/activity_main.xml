@@ -38,7 +38,7 @@
             android:layout_marginStart="@dimen/margin_2"
             android:layout_weight="1"
             android:text="@string/button_favorites"
-            app:backgroundTint="@color/red_color"
+            android:backgroundTint="@color/red_color"
             app:icon="@drawable/ic_heart_empty"
             app:iconGravity="textEnd" />
 

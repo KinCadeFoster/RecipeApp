@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="StyleTitle14" parent="Widget.MaterialComponents.Button">
+
+    <style name="StyleTitle14">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/white_color</item>
@@ -13,14 +14,14 @@
         <item name="android:textColor">@color/grey</item>
     </style>
 
-    <style name="StyleTitle20" parent="Widget.MaterialComponents.Button">
+    <style name="StyleTitle20">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:textColor">@color/deep_violet_color</item>
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="StyleNavButton" parent="Widget.Material3.Button">
+    <style name="StyleNavButton">
         <item name="android:textAppearance">@style/StyleTitle14</item>
         <item name="android:paddingVertical">@dimen/padding_10</item>
         <item name="android:paddingHorizontal">@dimen/padding_0</item>
