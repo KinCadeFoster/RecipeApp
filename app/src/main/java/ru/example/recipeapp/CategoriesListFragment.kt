@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.example.recipeapp.databinding.FragmentListCategoriesBinding
+import ru.example.recipeapp.model.STUB
 
 
 class CategoriesListFragment : Fragment() {
@@ -19,4 +20,16 @@ class CategoriesListFragment : Fragment() {
     ): View {
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecycler()
+    }
+
+
+    private fun initRecycler() {
+        val categoriesAdapter = CategoriesListAdapter(STUB.getCategories())
+        binding.rvCategories.adapter = categoriesAdapter
+    }
+
 }
