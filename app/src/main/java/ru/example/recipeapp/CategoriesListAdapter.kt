@@ -10,6 +10,16 @@ import ru.example.recipeapp.model.Category
 class CategoriesListAdapter(private val dataSet: List<Category>) :
     RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
 
+    interface OnItemClickListener {
+        fun onItemClick(category: Category)
+    }
+
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
+
     class ViewHolder(val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -32,6 +42,10 @@ class CategoriesListAdapter(private val dataSet: List<Category>) :
 
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+
+        holder.binding.root.setOnClickListener {
+            itemClickListener?.onItemClick(category)
         }
     }
 
