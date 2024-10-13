@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import ru.example.recipeapp.databinding.FragmentListRecipesBinding
@@ -47,7 +48,8 @@ class RecipesListFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        val recipeAdapter = RecipeAdapter(STUB.getRecipesByCategoryId(categoryId!!))
+        val recipes = categoryId?.let { STUB.getRecipesByCategoryId(it) } ?: emptyList()
+        val recipeAdapter = RecipeAdapter(recipes)
         binding.rvRecipes.adapter = recipeAdapter
 
         recipeAdapter.setOnItemClickListener(object :
@@ -59,10 +61,20 @@ class RecipesListFragment : Fragment() {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
+        val recipe = STUB.getRecipeById(recipeId)
+
+        if (recipe != null) {
+            val bundle = Bundle().apply {
+                putParcelable(Constants.ARG_RECIPE, recipe)
+            }
+
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace<RecipeFragment>(R.id.mainContainer)
+                replace<RecipeFragment>(R.id.mainContainer, args = bundle)
                 addToBackStack(null)
             }
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.recipe_not_found), Toast.LENGTH_SHORT).show()
         }
+    }
 }
