@@ -74,7 +74,7 @@ class RecipesListFragment : Fragment() {
                 addToBackStack(null)
             }
         } else {
-            Toast.makeText(requireContext(), "Такого рецепта нет", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.recipe_not_found), Toast.LENGTH_SHORT).show()
         }
     }
 }

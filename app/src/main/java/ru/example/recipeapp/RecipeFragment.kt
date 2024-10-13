@@ -29,9 +29,9 @@ class RecipeFragment : Fragment() {
         val recipe = getRecipeFromArguments()
 
         if (recipe != null) {
-            binding.textView1.text = recipe.title
+            binding.tVRecipeTitle.text = recipe.title
         } else {
-            Toast.makeText(requireContext(), "Не нашли такого рецепта", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.recipe_not_found), Toast.LENGTH_SHORT).show()
         }
     }
 
