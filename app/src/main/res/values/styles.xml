@@ -41,5 +41,12 @@
         <item name="android:textColor">@color/deep_violet_color</item>
     </style>
 
+    <style name="StyleRecipe20">
+        <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textColor">@color/purple</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 
 </resources>

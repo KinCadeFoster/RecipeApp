@@ -3,4 +3,7 @@
     <string name="button_categories">категории</string>
     <string name="button_favorites">избранное</string>
     <string name="recipe_not_found">Рецепт не найден</string>
+    <string name="button_recipe">заголовок рецепта</string>
+    <string name="ingredients">Ингредиенты</string>
+    <string name="cooking_method">Способ приготовления</string>
 </resources>
