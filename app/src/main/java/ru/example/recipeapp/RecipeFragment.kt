@@ -83,8 +83,12 @@ class RecipeFragment : Fragment() {
             requireContext(),
             LinearLayoutManager.VERTICAL
         ).apply {
+            setDividerInsetStartResource(requireContext(), R.dimen.divider_inset_start)
+            setDividerInsetEndResource(requireContext(),R.dimen.divider_inset_end)
+
             dividerThickness = resources.getDimensionPixelSize(R.dimen.divider_thickness)
             dividerColor = resources.getColor(R.color.divider_color, null)
+            isLastItemDecorated = false
         }
     }
 }

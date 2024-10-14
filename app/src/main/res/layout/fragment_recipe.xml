@@ -23,18 +23,17 @@
         <TextView
             android:id="@+id/tVHeader"
             style="@style/tVHeader"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="102dp"
             android:layout_marginBottom="@dimen/margin_16"
+            android:maxWidth="242dp"
             android:text="@string/button_recipe"
             android:ellipsize="end"
             android:maxLines="2"
             android:breakStrategy="simple"
             app:layout_constraintBottom_toBottomOf="@+id/header_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tVHeaderIngredients"
@@ -54,6 +53,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:layout_margin="@dimen/margin_16"
+            android:background="@drawable/recipe_list_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tVHeaderIngredients" />
@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:layout_margin="@dimen/margin_16"
+            android:background="@drawable/recipe_list_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tVMethod" />

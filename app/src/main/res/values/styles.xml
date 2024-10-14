@@ -48,5 +48,10 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="StyleRecipe14">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
 
 </resources>

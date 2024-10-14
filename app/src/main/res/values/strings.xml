@@ -6,4 +6,5 @@
     <string name="button_recipe">recipe_title</string>
     <string name="ingredients">Ingredients</string>
     <string name="cooking_method">Cooking method</string>
+    <string name="quantity">Quantity</string>
 </resources>
