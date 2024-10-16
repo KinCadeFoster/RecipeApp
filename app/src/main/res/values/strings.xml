@@ -7,4 +7,5 @@
     <string name="ingredients">Ingredients</string>
     <string name="cooking_method">Cooking method</string>
     <string name="quantity">Quantity</string>
+    <string name="portions">Portions:</string>
 </resources>

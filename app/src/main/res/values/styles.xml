@@ -36,8 +36,7 @@
 
     <style name="itemCategoryHeader">
         <item name="android:textAppearance">@style/StyleTitle14</item>
-        <item name="android:paddingVertical">@dimen/padding_8</item>
-        <item name="android:paddingHorizontal">@dimen/padding_8</item>
+        <item name= "android:layout_margin">@dimen/margin_8</item>
         <item name="android:textColor">@color/deep_violet_color</item>
     </style>
 
@@ -52,6 +51,13 @@
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="StylePortions16">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@color/grey2</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

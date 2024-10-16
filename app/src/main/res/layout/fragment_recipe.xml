@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,16 +48,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_image" />
 
+        <TextView
+            android:id="@+id/tVPortion"
+            style="@style/StylePortions16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/portions"
+            android:layout_marginVertical="@dimen/margin_6"
+            android:layout_marginStart="@dimen/margin_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVHeaderIngredients" />
+
+        <TextView
+            android:id="@+id/tVPortionNum"
+            style="@style/StylePortions16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_6"
+            android:layout_marginStart="@dimen/margin_6"
+            tools:text = "10"
+            app:layout_constraintStart_toEndOf="@+id/tVPortion"
+            app:layout_constraintTop_toBottomOf="@+id/tVHeaderIngredients" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:layout_margin="@dimen/margin_16"
             android:background="@drawable/recipe_list_background"
-            app:layout_constraintStart_toStartOf="parent"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tVHeaderIngredients" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <TextView
             android:id="@+id/tVMethod"
@@ -79,6 +102,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tVMethod" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16"
+            android:min="1"
+            android:max="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVPortion" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
