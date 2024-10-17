@@ -4,20 +4,20 @@
     <style name="StyleTitle14">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_14</item>
-        <item name="android:textColor">@color/white_color</item>
+        <item name="android:textColor">@color/color_white</item>
         <item name="textAllCaps">true</item>
     </style>
 
     <style name="StyleTitle12">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/text_size_12</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/color_grey</item>
     </style>
 
     <style name="StyleTitle20">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_20</item>
-        <item name="android:textColor">@color/deep_violet_color</item>
+        <item name="android:textColor">@color/color_deep_violet</item>
         <item name="textAllCaps">true</item>
     </style>
 
@@ -37,27 +37,34 @@
     <style name="itemCategoryHeader">
         <item name="android:textAppearance">@style/StyleTitle14</item>
         <item name="android:layout_margin">@dimen/common_8dp</item>
-        <item name="android:textColor">@color/deep_violet_color</item>
+        <item name="android:textColor">@color/color_deep_violet</item>
     </style>
 
     <style name="StyleRecipe20">
         <item name="android:fontFamily">@font/montserrat_alternates_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_20</item>
-        <item name="android:textColor">@color/purple</item>
+        <item name="android:textColor">@color/color_purple</item>
         <item name="textAllCaps">true</item>
     </style>
 
     <style name="StyleRecipe14">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/text_size_14</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/color_grey</item>
     </style>
 
     <style name="StylePortions16">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/text_size_16</item>
-        <item name="android:textColor">@color/grey2</item>
+        <item name="android:textColor">@color/color_grey2</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="styleSeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressDrawable">@drawable/shape_seekbar_progress</item>
+        <item name="android:thumb">@drawable/shape_seekbar_thumb</item>
+        <item name="android:paddingStart">@dimen/common_0dp</item>
+        <item name="android:paddingEnd">@dimen/common_0dp</item>
     </style>
 
 </resources>

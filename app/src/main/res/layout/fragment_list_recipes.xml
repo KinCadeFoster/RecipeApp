@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/fragment_recipes_list"
     tools:context=".RecipesListFragment"
-    android:background="@color/main_background_color">
+    android:background="@color/color_main_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,9 +44,6 @@
         android:layout_marginTop="@dimen/common_8dp"
         android:padding="@dimen/common_8dp"
         android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
-        tools:itemCount="6"
-        tools:listitem="@layout/item_category" />
-
+        tools:listitem="@layout/item_category"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>

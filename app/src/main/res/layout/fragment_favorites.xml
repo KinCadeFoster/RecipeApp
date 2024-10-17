@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_favorites"
     tools:context=".FavoritesFragment"
-    android:background="@color/main_background_color">
+    android:background="@color/color_main_background">
 
     <TextView
         android:layout_width="wrap_content"

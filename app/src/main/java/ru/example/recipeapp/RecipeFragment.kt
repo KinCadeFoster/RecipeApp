@@ -109,7 +109,7 @@ class RecipeFragment : Fragment() {
             setDividerInsetEndResource(requireContext(), R.dimen.divider_inset)
 
             dividerThickness = resources.getDimensionPixelSize(R.dimen.divider_thickness)
-            dividerColor = resources.getColor(R.color.divider_color, null)
+            dividerColor = resources.getColor(R.color.color_divider, null)
             isLastItemDecorated = false
         }
     }
