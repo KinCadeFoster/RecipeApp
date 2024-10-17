@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/padding_8">
+    android:padding="@dimen/common_8dp">
 
     <TextView
         android:id="@+id/tvIngredient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingStart="@dimen/padding_4"
-        tools:text="@string/ingredients"
+        android:paddingStart="@dimen/common_4dp"
+        tools:text="@string/text_ingredients"
         style="@style/StyleRecipe14"
         android:textAllCaps="true"
         tools:ignore="RtlSymmetry" />
@@ -21,8 +21,8 @@
         android:id="@+id/tvQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/padding_4"
-        tools:text="@string/quantity"
+        android:paddingEnd="@dimen/common_4dp"
+        tools:text="@string/text_quantity"
         style="@style/StyleRecipe14"
         android:textAllCaps="true"
         tools:ignore="RtlSymmetry" />

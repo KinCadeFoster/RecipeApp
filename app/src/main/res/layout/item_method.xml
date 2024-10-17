@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/padding_8">
+    android:padding="@dimen/common_8dp">
 
     <TextView
         android:id="@+id/tvStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/cooking_method"
+        tools:text="@string/text_cooking_method"
         style="@style/StyleRecipe14"
-        android:paddingStart="@dimen/padding_4"
-        android:paddingEnd="@dimen/padding_4"
+        android:paddingStart="@dimen/common_4dp"
+        android:paddingEnd="@dimen/common_4dp"
         tools:ignore="RtlSymmetry" />
 </LinearLayout>

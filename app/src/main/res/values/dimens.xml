@@ -1,34 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="common_0dp">0dp</dimen>
+    <dimen name="common_1dp">1dp</dimen>
     <dimen name="common_2dp">2dp</dimen>
     <dimen name="common_4dp">4dp</dimen>
-    <dimen name="common_8dp">8dp</dimen>
     <dimen name="common_6dp">6dp</dimen>
+    <dimen name="common_8dp">8dp</dimen>
     <dimen name="common_10dp">10dp</dimen>
     <dimen name="common_12dp">12dp</dimen>
     <dimen name="common_16dp">16dp</dimen>
 
     <dimen name="image_view_height">224dp</dimen>
 
-    <dimen name="margin_16">@dimen/common_16dp</dimen>
-    <dimen name="margin_10">@dimen/common_10dp</dimen>
-    <dimen name="margin_8">@dimen/common_8dp</dimen>
-    <dimen name="margin_6">@dimen/common_6dp</dimen>
-    <dimen name="margin_4">@dimen/common_4dp</dimen>
-    <dimen name="margin_2">@dimen/common_2dp</dimen>
+    <dimen name="divider_thickness">@dimen/common_1dp</dimen>
+    <dimen name="divider_inset">@dimen/common_12dp</dimen>
 
-    <dimen name="padding_10">@dimen/common_10dp</dimen>
-    <dimen name="padding_8">@dimen/common_8dp</dimen>
-    <dimen name="padding_4">@dimen/common_4dp</dimen>
-    <dimen name="padding_0">@dimen/common_0dp</dimen>
-
-    <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
-
-    <dimen name="divider_thickness">1dp</dimen>
-    <dimen name="divider_inset_start">@dimen/common_12dp</dimen>
-    <dimen name="divider_inset_end">@dimen/common_12dp</dimen>
 </resources>

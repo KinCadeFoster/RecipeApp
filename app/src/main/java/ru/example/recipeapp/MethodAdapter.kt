@@ -18,7 +18,8 @@ class MethodAdapter(private val method: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvStep.text = method[position]
+        val text = "${position + 1}. ${method[position]}"
+        holder.binding.tvStep.text = text
     }
 
     override fun getItemCount() = method.size

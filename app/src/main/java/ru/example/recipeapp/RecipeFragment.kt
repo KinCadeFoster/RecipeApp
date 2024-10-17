@@ -40,7 +40,7 @@ class RecipeFragment : Fragment() {
         } else {
             Toast.makeText(
                 requireContext(),
-                getString(R.string.recipe_not_found),
+                getString(R.string.text_recipe_not_found),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -63,11 +63,12 @@ class RecipeFragment : Fragment() {
             val imageResources = requireContext().assets.open(it).use { inputStream ->
                 BitmapFactory.decodeStream(inputStream)
             }
+
             binding.headerImage.setImageBitmap(imageResources)
+            binding.headerImage.contentDescription = getString(
+                R.string.content_description_recipe_image, recipe.title
+            )
         }
-        val defaultQuantity = 1
-        binding.seekBar.progress = defaultQuantity - 1
-        binding.tVPortionNum.text = defaultQuantity.toString()
     }
 
     private fun initRecycler(recipe: Recipe) {
@@ -85,7 +86,7 @@ class RecipeFragment : Fragment() {
         binding.rvIngredients.addItemDecoration(ingredientDivider)
         binding.rvMethod.addItemDecoration(methodDivider)
 
-        binding.seekBar.setOnSeekBarChangeListener( object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 ingredientsAdapter.updateIngredients(progress)
                 binding.tVPortionNum.text = progress.toString()
@@ -96,7 +97,7 @@ class RecipeFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
-        } )
+        })
     }
 
     private fun createDivider(): MaterialDividerItemDecoration {
@@ -104,8 +105,8 @@ class RecipeFragment : Fragment() {
             requireContext(),
             LinearLayoutManager.VERTICAL
         ).apply {
-            setDividerInsetStartResource(requireContext(), R.dimen.divider_inset_start)
-            setDividerInsetEndResource(requireContext(),R.dimen.divider_inset_end)
+            setDividerInsetStartResource(requireContext(), R.dimen.divider_inset)
+            setDividerInsetEndResource(requireContext(), R.dimen.divider_inset)
 
             dividerThickness = resources.getDimensionPixelSize(R.dimen.divider_thickness)
             dividerColor = resources.getColor(R.color.divider_color, null)
