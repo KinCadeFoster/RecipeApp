@@ -105,11 +105,12 @@
 
         <SeekBar
             android:id="@+id/seekBar"
+            style="@style/styleSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/common_16dp"
-            android:min="1"
             android:max="5"
+            android:min="1"
             android:progress="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
