@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +14,7 @@
             android:id="@+id/header_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_view_height"
-            android:contentDescription="@string/button_recipe"
+            android:contentDescription="@string/content_description_recipe_image"
             android:scaleType="centerCrop"
             android:src="@drawable/bcg_categories"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,10 +26,10 @@
             style="@style/tVHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_16"
+            android:layout_marginStart="@dimen/common_16dp"
+            android:layout_marginBottom="@dimen/common_16dp"
             android:maxWidth="242dp"
-            android:text="@string/button_recipe"
+            tools:text="Бургер с котлетой"
             android:ellipsize="end"
             android:maxLines="2"
             android:breakStrategy="simple"
@@ -40,32 +41,54 @@
             style="@style/StyleRecipe20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ingredients"
+            android:text="@string/text_ingredients"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/common_16dp"
+            android:layout_marginTop="@dimen/common_16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_image" />
+
+        <TextView
+            android:id="@+id/tVPortion"
+            style="@style/StylePortions16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_portions"
+            android:layout_marginVertical="@dimen/common_6dp"
+            android:layout_marginStart="@dimen/common_16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVHeaderIngredients" />
+
+        <TextView
+            android:id="@+id/tVPortionNum"
+            style="@style/StylePortions16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/common_6dp"
+            android:layout_marginStart="@dimen/common_6dp"
+            tools:text="10"
+            app:layout_constraintStart_toEndOf="@+id/tVPortion"
+            app:layout_constraintTop_toBottomOf="@+id/tVHeaderIngredients" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:layout_margin="@dimen/margin_16"
+            android:layout_margin="@dimen/common_16dp"
             android:background="@drawable/recipe_list_background"
-            app:layout_constraintStart_toStartOf="parent"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tVHeaderIngredients" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <TextView
             android:id="@+id/tVMethod"
             style="@style/StyleRecipe20"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/common_16dp"
+            android:layout_marginTop="@dimen/common_16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cooking_method"
+            android:text="@string/text_cooking_method"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvIngredients" />
 
@@ -74,11 +97,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            android:layout_margin="@dimen/margin_16"
+            android:layout_margin="@dimen/common_16dp"
             android:background="@drawable/recipe_list_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tVMethod" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/common_16dp"
+            android:min="1"
+            android:max="5"
+            android:progress="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVPortion" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

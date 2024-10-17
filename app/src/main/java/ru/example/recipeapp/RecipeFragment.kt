@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -18,6 +19,8 @@ class RecipeFragment : Fragment() {
     private val binding by lazy {
         FragmentRecipeBinding.inflate(layoutInflater)
     }
+
+    private lateinit var ingredientsAdapter: IngredientsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +40,7 @@ class RecipeFragment : Fragment() {
         } else {
             Toast.makeText(
                 requireContext(),
-                getString(R.string.recipe_not_found),
+                getString(R.string.text_recipe_not_found),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -60,15 +63,21 @@ class RecipeFragment : Fragment() {
             val imageResources = requireContext().assets.open(it).use { inputStream ->
                 BitmapFactory.decodeStream(inputStream)
             }
+
             binding.headerImage.setImageBitmap(imageResources)
+            binding.headerImage.contentDescription = getString(
+                R.string.content_description_recipe_image, recipe.title
+            )
         }
     }
 
     private fun initRecycler(recipe: Recipe) {
+        ingredientsAdapter = IngredientsAdapter(recipe.ingredients)
+
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.rvIngredients.adapter = IngredientsAdapter(recipe.ingredients)
+        binding.rvIngredients.adapter = ingredientsAdapter
         binding.rvMethod.adapter = MethodAdapter(recipe.method)
 
         val ingredientDivider = createDivider()
@@ -76,6 +85,19 @@ class RecipeFragment : Fragment() {
 
         binding.rvIngredients.addItemDecoration(ingredientDivider)
         binding.rvMethod.addItemDecoration(methodDivider)
+
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                ingredientsAdapter.updateIngredients(progress)
+                binding.tVPortionNum.text = progress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
     }
 
     private fun createDivider(): MaterialDividerItemDecoration {
@@ -83,8 +105,8 @@ class RecipeFragment : Fragment() {
             requireContext(),
             LinearLayoutManager.VERTICAL
         ).apply {
-            setDividerInsetStartResource(requireContext(), R.dimen.divider_inset_start)
-            setDividerInsetEndResource(requireContext(),R.dimen.divider_inset_end)
+            setDividerInsetStartResource(requireContext(), R.dimen.divider_inset)
+            setDividerInsetEndResource(requireContext(), R.dimen.divider_inset)
 
             dividerThickness = resources.getDimensionPixelSize(R.dimen.divider_thickness)
             dividerColor = resources.getColor(R.color.divider_color, null)

@@ -5,9 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.example.recipeapp.databinding.ItemIngredientBinding
 import ru.example.recipeapp.model.Ingredient
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class IngredientsAdapter(private val dataSet: List<Ingredient>) :
     RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+
+    private var quantity: Int = 1
 
     class ViewHolder(val binding: ItemIngredientBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -21,9 +25,21 @@ class IngredientsAdapter(private val dataSet: List<Ingredient>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ingredient: Ingredient = dataSet[position]
         holder.binding.tvIngredient.text = ingredient.description
-        val quantity = "${ingredient.quantity} ${ingredient.unitOfMeasure}"
-        holder.binding.tvQuantity.text = quantity
+
+        val quantityValue = ingredient.quantity.toDoubleOrNull() ?: 0.0
+        val totalQuantity = BigDecimal(quantityValue) * BigDecimal(quantity)
+
+        val quantityText = totalQuantity
+            .setScale(1, RoundingMode.HALF_UP)
+            .stripTrailingZeros()
+            .toPlainString()
+        holder.binding.tvQuantity.text = quantityText
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun updateIngredients(progress: Int) {
+        quantity = progress.coerceAtLeast(1)
+        notifyDataSetChanged()
+    }
 }

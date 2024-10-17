@@ -12,8 +12,8 @@
         android:id="@+id/button_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_16"
-        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginHorizontal="@dimen/common_16dp"
+        android:layout_marginBottom="@dimen/common_8dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,19 +25,19 @@
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_2"
+            android:layout_marginEnd="@dimen/common_2dp"
             android:layout_weight="1"
             android:backgroundTint="@color/violet_color"
-            android:text="@string/button_categories" />
+            android:text="@string/text_button_categories" />
 
         <Button
             android:id="@+id/bFavorites"
             style="@style/StyleNavButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_2"
+            android:layout_marginStart="@dimen/common_2dp"
             android:layout_weight="1"
-            android:text="@string/button_favorites"
+            android:text="@string/text_button_favorites"
             android:backgroundTint="@color/red_color"
             app:icon="@drawable/ic_heart_empty"
             app:iconGravity="textEnd" />
