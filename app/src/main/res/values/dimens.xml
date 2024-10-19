@@ -11,6 +11,7 @@
     <dimen name="common_30dp">30dp</dimen>
 
     <dimen name="image_view_height">224dp</dimen>
+    <dimen name="maxWidthTV">242dp</dimen>
 
     <dimen name="divider_thickness">@dimen/common_1dp</dimen>
     <dimen name="divider_inset">@dimen/common_12dp</dimen>
