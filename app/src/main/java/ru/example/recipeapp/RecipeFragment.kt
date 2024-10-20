@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,10 +19,7 @@ class RecipeFragment : Fragment() {
     private val binding by lazy {
         FragmentRecipeBinding.inflate(layoutInflater)
     }
-
-    private lateinit var imageHeartButton: ImageButton
     private var isFavorite: Boolean = false
-
     private lateinit var ingredientsAdapter: IngredientsAdapter
 
     override fun onCreateView(
@@ -74,13 +70,12 @@ class RecipeFragment : Fragment() {
             )
         }
 
-        imageHeartButton = binding.imageHeartButton
-        imageHeartButton.setOnClickListener {
+        binding.imageHeartButton.setOnClickListener {
             isFavorite = !isFavorite
             if (isFavorite) {
-                imageHeartButton.setImageResource(R.drawable.ic_heart)
+                binding.imageHeartButton.setImageResource(R.drawable.ic_heart)
             } else {
-                imageHeartButton.setImageResource(R.drawable.ic_heart_empty)
+                binding.imageHeartButton.setImageResource(R.drawable.ic_heart_empty)
             }
         }
     }
