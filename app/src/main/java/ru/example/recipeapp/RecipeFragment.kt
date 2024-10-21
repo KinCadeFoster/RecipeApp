@@ -11,6 +11,8 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import ru.example.recipeapp.Constants.KEY_FAVORITE_RECIPES
+import ru.example.recipeapp.Constants.SHARED_PREFS_NAME
 import ru.example.recipeapp.databinding.FragmentRecipeBinding
 import ru.example.recipeapp.model.Recipe
 
@@ -21,6 +23,10 @@ class RecipeFragment : Fragment() {
     }
     private var isFavorite: Boolean = false
     private lateinit var ingredientsAdapter: IngredientsAdapter
+
+    private val sharedPrefs by lazy {
+        requireContext().getSharedPreferences(SHARED_PREFS_NAME, android.content.Context.MODE_PRIVATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,14 +76,32 @@ class RecipeFragment : Fragment() {
             )
         }
 
+        val favorites = getFavorites()
+        isFavorite = favorites.contains(recipe.id.toString())
+        updateFavoriteIcon(isFavorite)
+
         binding.imageHeartButton.setOnClickListener {
-            isFavorite = !isFavorite
-            if (isFavorite) {
-                binding.imageHeartButton.setImageResource(R.drawable.ic_heart)
-            } else {
-                binding.imageHeartButton.setImageResource(R.drawable.ic_heart_empty)
-            }
+            toggleFavoriteState(recipe.id.toString())
         }
+    }
+
+    private fun toggleFavoriteState(recipeId: String) {
+        val favorites = getFavorites()
+
+        isFavorite = if (favorites.contains(recipeId)) {
+            favorites.remove(recipeId)
+            false
+        } else {
+            favorites.add(recipeId)
+            true
+        }
+        updateFavoriteIcon(isFavorite)
+        saveFavorites(favorites)
+    }
+
+    private fun updateFavoriteIcon(isFavorite: Boolean) {
+        val iconResId = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
+        binding.imageHeartButton.setImageResource(iconResId)
     }
 
 
@@ -122,5 +146,16 @@ class RecipeFragment : Fragment() {
             dividerColor = resources.getColor(R.color.color_divider, null)
             isLastItemDecorated = false
         }
+    }
+
+    private fun saveFavorites(favoriteIds: Set<String>) {
+        sharedPrefs.edit()
+            .putStringSet(KEY_FAVORITE_RECIPES, favoriteIds)
+            .apply()
+    }
+
+    private fun getFavorites(): MutableSet<String> {
+        val savedFavorites = sharedPrefs.getStringSet(KEY_FAVORITE_RECIPES, emptySet())
+        return HashSet(savedFavorites ?: emptySet())
     }
 }
