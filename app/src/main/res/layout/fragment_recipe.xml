@@ -21,6 +21,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/imageHeartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_12dp"
+            android:layout_marginEnd="@dimen/common_12dp"
+            android:background="@color/color_transparent"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/content_description_button_heart_image"
+            android:padding="@dimen/common_4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_heart_empty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tVHeader"
             style="@style/tVHeader"
@@ -28,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_16dp"
             android:layout_marginBottom="@dimen/common_16dp"
-            android:maxWidth="242dp"
+            android:maxWidth="@dimen/maxWidthTV"
             tools:text="Бургер с котлетой"
             android:ellipsize="end"
             android:maxLines="2"
@@ -108,7 +125,7 @@
             style="@style/styleSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/common_16dp"
+            android:layout_marginHorizontal="@dimen/common_12dp"
             android:max="5"
             android:min="1"
             android:progress="1"

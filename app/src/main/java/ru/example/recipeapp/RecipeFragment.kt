@@ -19,7 +19,7 @@ class RecipeFragment : Fragment() {
     private val binding by lazy {
         FragmentRecipeBinding.inflate(layoutInflater)
     }
-
+    private var isFavorite: Boolean = false
     private lateinit var ingredientsAdapter: IngredientsAdapter
 
     override fun onCreateView(
@@ -69,7 +69,17 @@ class RecipeFragment : Fragment() {
                 R.string.content_description_recipe_image, recipe.title
             )
         }
+
+        binding.imageHeartButton.setOnClickListener {
+            isFavorite = !isFavorite
+            if (isFavorite) {
+                binding.imageHeartButton.setImageResource(R.drawable.ic_heart)
+            } else {
+                binding.imageHeartButton.setImageResource(R.drawable.ic_heart_empty)
+            }
+        }
     }
+
 
     private fun initRecycler(recipe: Recipe) {
         ingredientsAdapter = IngredientsAdapter(recipe.ingredients)

@@ -11,4 +11,5 @@
     <color name="color_grey2">#626466</color>
     <color name="color_purple">#422952</color>
     <color name="color_divider">#F5F5F5</color>
+    <color name="color_transparent">#00000000</color>
 </resources>
