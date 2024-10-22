@@ -29,10 +29,12 @@ class IngredientsAdapter(private val dataSet: List<Ingredient>) :
         val quantityValue = ingredient.quantity.toDoubleOrNull() ?: 0.0
         val totalQuantity = BigDecimal(quantityValue) * BigDecimal(quantity)
 
-        val quantityText = totalQuantity
+        val quantityNum = totalQuantity
             .setScale(1, RoundingMode.HALF_UP)
             .stripTrailingZeros()
             .toPlainString()
+
+        val quantityText = "$quantityNum ${ingredient.unitOfMeasure}"
         holder.binding.tvQuantity.text = quantityText
     }
 

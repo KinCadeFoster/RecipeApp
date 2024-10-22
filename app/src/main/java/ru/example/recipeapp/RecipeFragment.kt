@@ -76,9 +76,7 @@ class RecipeFragment : Fragment() {
             )
         }
 
-        val favorites = getFavorites()
-        isFavorite = favorites.contains(recipe.id.toString())
-        updateFavoriteIcon(isFavorite)
+        updateFavoriteIcon(getFavorites().contains(recipe.id.toString()))
 
         binding.imageHeartButton.setOnClickListener {
             toggleFavoriteState(recipe.id.toString())
