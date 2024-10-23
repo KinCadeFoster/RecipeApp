@@ -21,8 +21,11 @@ class RecipeFragment : Fragment() {
     private val binding by lazy {
         FragmentRecipeBinding.inflate(layoutInflater)
     }
+    private val ingredientsAdapter by lazy {
+        IngredientsAdapter(emptyList())
+    }
+
     private var isFavorite: Boolean = false
-    private lateinit var ingredientsAdapter: IngredientsAdapter
 
     private val sharedPrefs by lazy {
         requireContext().getSharedPreferences(SHARED_PREFS_NAME, android.content.Context.MODE_PRIVATE)
@@ -43,6 +46,7 @@ class RecipeFragment : Fragment() {
         if (recipe != null) {
             initUI(recipe)
             initRecycler(recipe)
+            ingredientsAdapter.updateDataSet(recipe.ingredients)
         } else {
             Toast.makeText(
                 requireContext(),
@@ -81,6 +85,7 @@ class RecipeFragment : Fragment() {
         binding.imageHeartButton.setOnClickListener {
             toggleFavoriteState(recipe.id.toString())
         }
+        binding.tVPortionNum.text = binding.seekBar.progress.toString()
     }
 
     private fun toggleFavoriteState(recipeId: String) {
@@ -104,7 +109,7 @@ class RecipeFragment : Fragment() {
 
 
     private fun initRecycler(recipe: Recipe) {
-        ingredientsAdapter = IngredientsAdapter(recipe.ingredients)
+       // ingredientsAdapter = IngredientsAdapter(recipe.ingredients)
 
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
@@ -131,6 +136,8 @@ class RecipeFragment : Fragment() {
             }
         })
     }
+
+
 
     private fun createDivider(): MaterialDividerItemDecoration {
         return MaterialDividerItemDecoration(
