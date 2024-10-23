@@ -109,8 +109,6 @@ class RecipeFragment : Fragment() {
 
 
     private fun initRecycler(recipe: Recipe) {
-       // ingredientsAdapter = IngredientsAdapter(recipe.ingredients)
-
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
