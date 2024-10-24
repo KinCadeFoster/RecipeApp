@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/fragment_recipes_list"
-    tools:context=".RecipesListFragment"
+    tools:context=".ui.recipes.recipe_list.RecipesListFragment"
     android:background="@color/color_main_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout

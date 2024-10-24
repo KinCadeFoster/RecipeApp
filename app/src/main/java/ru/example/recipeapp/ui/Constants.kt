@@ -1,4 +1,4 @@
-package ru.example.recipeapp
+package ru.example.recipeapp.ui
 
 object Constants {
     const val ARG_CATEGORY_ID = "ARG_CATEGORY_ID"
