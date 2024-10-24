@@ -275,4 +275,8 @@ object STUB {
             emptyList()
         }
     }
+
+    fun getRecipesByIds(data: Set<Int>): List<Recipe> {
+        return burgerRecipes.filter { it.id in data }
+    }
 }

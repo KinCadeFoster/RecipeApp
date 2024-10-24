@@ -12,4 +12,5 @@
 
     <string name="content_description_recipe_image">Recipe image: %1$s</string>
     <string name="content_description_button_heart_image">Add to favorites</string>
+    <string name="text_empty_list">You haven\'t added any recipes to your favorites yet</string>
 </resources>
