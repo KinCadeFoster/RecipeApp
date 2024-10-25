@@ -109,7 +109,6 @@ class RecipeFragment : Fragment() {
         binding.imageHeartButton.setImageResource(iconResId)
     }
 
-
     private fun initRecycler(recipe: Recipe) {
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
@@ -136,8 +135,6 @@ class RecipeFragment : Fragment() {
             }
         })
     }
-
-
 
     private fun createDivider(): MaterialDividerItemDecoration {
         return MaterialDividerItemDecoration(
