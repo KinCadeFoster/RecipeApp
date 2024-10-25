@@ -1,4 +1,4 @@
-package ru.example.recipeapp
+package ru.example.recipeapp.ui.recipes.recipe
 
 import android.graphics.BitmapFactory
 import android.os.Build
@@ -11,10 +11,12 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import ru.example.recipeapp.Constants.KEY_FAVORITE_RECIPES
-import ru.example.recipeapp.Constants.SHARED_PREFS_NAME
+import ru.example.recipeapp.R
+import ru.example.recipeapp.ui.Constants.KEY_FAVORITE_RECIPES
+import ru.example.recipeapp.ui.Constants.SHARED_PREFS_NAME
 import ru.example.recipeapp.databinding.FragmentRecipeBinding
 import ru.example.recipeapp.model.Recipe
+import ru.example.recipeapp.ui.Constants
 
 
 class RecipeFragment : Fragment() {
@@ -107,7 +109,6 @@ class RecipeFragment : Fragment() {
         binding.imageHeartButton.setImageResource(iconResId)
     }
 
-
     private fun initRecycler(recipe: Recipe) {
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
@@ -134,8 +135,6 @@ class RecipeFragment : Fragment() {
             }
         })
     }
-
-
 
     private fun createDivider(): MaterialDividerItemDecoration {
         return MaterialDividerItemDecoration(

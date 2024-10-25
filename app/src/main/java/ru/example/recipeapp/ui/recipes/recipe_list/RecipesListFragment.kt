@@ -1,4 +1,4 @@
-package ru.example.recipeapp
+package ru.example.recipeapp.ui.recipes.recipe_list
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import ru.example.recipeapp.R
 import ru.example.recipeapp.databinding.FragmentListRecipesBinding
-import ru.example.recipeapp.model.STUB
+import ru.example.recipeapp.data.STUB
+import ru.example.recipeapp.ui.Constants
+import ru.example.recipeapp.ui.recipes.recipe.RecipeFragment
 
 
 class RecipesListFragment : Fragment() {

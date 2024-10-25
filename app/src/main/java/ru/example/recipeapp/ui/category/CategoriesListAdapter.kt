@@ -1,4 +1,4 @@
-package ru.example.recipeapp
+package ru.example.recipeapp.ui.category
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater

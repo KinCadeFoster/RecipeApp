@@ -1,4 +1,4 @@
-package ru.example.recipeapp
+package ru.example.recipeapp.ui.recipes.favorites
 
 import android.content.Context
 import android.os.Bundle
@@ -9,11 +9,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import ru.example.recipeapp.Constants.KEY_FAVORITE_RECIPES
-import ru.example.recipeapp.Constants.SHARED_PREFS_NAME
+import ru.example.recipeapp.R
+import ru.example.recipeapp.ui.Constants.KEY_FAVORITE_RECIPES
+import ru.example.recipeapp.ui.Constants.SHARED_PREFS_NAME
 import ru.example.recipeapp.databinding.FragmentFavoritesBinding
 import ru.example.recipeapp.model.Recipe
-import ru.example.recipeapp.model.STUB
+import ru.example.recipeapp.data.STUB
+import ru.example.recipeapp.ui.Constants
+import ru.example.recipeapp.ui.recipes.recipe_list.RecipeAdapter
+import ru.example.recipeapp.ui.recipes.recipe.RecipeFragment
 
 
 class FavoritesFragment : Fragment() {
