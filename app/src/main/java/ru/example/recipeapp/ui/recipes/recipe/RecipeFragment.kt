@@ -3,12 +3,14 @@ package ru.example.recipeapp.ui.recipes.recipe
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import ru.example.recipeapp.R
@@ -33,6 +35,8 @@ class RecipeFragment : Fragment() {
         requireContext().getSharedPreferences(SHARED_PREFS_NAME, android.content.Context.MODE_PRIVATE)
     }
 
+    private val viewModel: RecipeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +46,10 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.recipeLiveData.observe(viewLifecycleOwner) { recipeLiveData ->
+            Log.i("!!!", "isFavorite: ${recipeLiveData.isFavorite}")
+        }
 
         val recipe = getRecipeFromArguments()
 
