@@ -3,7 +3,6 @@ package ru.example.recipeapp.ui.recipes.recipe
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import ru.example.recipeapp.R
-import ru.example.recipeapp.ui.Constants.KEY_FAVORITE_RECIPES
-import ru.example.recipeapp.ui.Constants.SHARED_PREFS_NAME
 import ru.example.recipeapp.databinding.FragmentRecipeBinding
 import ru.example.recipeapp.model.Recipe
 import ru.example.recipeapp.ui.Constants
@@ -29,13 +26,12 @@ class RecipeFragment : Fragment() {
         IngredientsAdapter(emptyList())
     }
 
-    private var isFavorite: Boolean = false
-
-    private val sharedPrefs by lazy {
-        requireContext().getSharedPreferences(SHARED_PREFS_NAME, android.content.Context.MODE_PRIVATE)
+    private val recipeId by lazy {
+        arguments?.getInt(Constants.ARG_RECIPE)
     }
-
-    private val viewModel: RecipeViewModel by viewModels()
+    private val viewModel: RecipeViewModel by viewModels {
+        RecipeViewModelFactory(requireContext(), recipeId!!)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,12 +43,7 @@ class RecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.recipeLiveData.observe(viewLifecycleOwner) { recipeLiveData ->
-            Log.i("!!!", "isFavorite: ${recipeLiveData.isFavorite}")
-        }
-
         val recipe = getRecipeFromArguments()
-
         if (recipe != null) {
             initUI(recipe)
             initRecycler(recipe)
@@ -76,40 +67,26 @@ class RecipeFragment : Fragment() {
     }
 
     private fun initUI(recipe: Recipe) {
-        binding.tVHeader.text = recipe.title
+        viewModel.recipeLiveData.observe(viewLifecycleOwner) {stateRecipe ->
+        binding.tVHeader.text = stateRecipe.recipe?.title
+        updateFavoriteIcon(stateRecipe.isFavorite)
+        binding.tVPortionNum.text = stateRecipe.portionCount.toString()
 
-        val recipeUrl = recipe.imageUrl
-        recipeUrl.let {
+        val recipeUrl = stateRecipe.recipe?.imageUrl
+        recipeUrl?.let {
             val imageResources = requireContext().assets.open(it).use { inputStream ->
                 BitmapFactory.decodeStream(inputStream)
             }
-
             binding.headerImage.setImageBitmap(imageResources)
             binding.headerImage.contentDescription = getString(
                 R.string.content_description_recipe_image, recipe.title
             )
         }
-
-        updateFavoriteIcon(getFavorites().contains(recipe.id.toString()))
-
-        binding.imageHeartButton.setOnClickListener {
-            toggleFavoriteState(recipe.id.toString())
-        }
-        binding.tVPortionNum.text = binding.seekBar.progress.toString()
     }
-
-    private fun toggleFavoriteState(recipeId: String) {
-        val favorites = getFavorites()
-
-        isFavorite = if (favorites.contains(recipeId)) {
-            favorites.remove(recipeId)
-            false
-        } else {
-            favorites.add(recipeId)
-            true
+        binding.imageHeartButton.setOnClickListener {
+            viewModel.onFavoritesClicked()
         }
-        updateFavoriteIcon(isFavorite)
-        saveFavorites(favorites)
+
     }
 
     private fun updateFavoriteIcon(isFavorite: Boolean) {
@@ -156,16 +133,5 @@ class RecipeFragment : Fragment() {
             dividerColor = resources.getColor(R.color.color_divider, null)
             isLastItemDecorated = false
         }
-    }
-
-    private fun saveFavorites(favoriteIds: Set<String>) {
-        sharedPrefs.edit()
-            .putStringSet(KEY_FAVORITE_RECIPES, favoriteIds)
-            .apply()
-    }
-
-    private fun getFavorites(): MutableSet<String> {
-        val savedFavorites = sharedPrefs.getStringSet(KEY_FAVORITE_RECIPES, emptySet())
-        return HashSet(savedFavorites ?: emptySet())
     }
 }
