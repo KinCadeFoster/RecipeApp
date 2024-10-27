@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class RecipeViewModelFactory(
     private val context: Context,
-    private val recipeId: Int
+    private val recipeId: Int?
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RecipeViewModel::class.java)) {

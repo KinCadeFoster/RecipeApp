@@ -15,7 +15,7 @@ data class RecipeState(
     val portionCount: Int = 1,
 )
 
-class RecipeViewModel(context: Context, recipeId: Int) : ViewModel() {
+class RecipeViewModel(context: Context, recipeId: Int?) : ViewModel() {
     private val _recipeLiveData = MutableLiveData<RecipeState>()
     val recipeLiveData: LiveData<RecipeState> = _recipeLiveData
 
@@ -24,7 +24,7 @@ class RecipeViewModel(context: Context, recipeId: Int) : ViewModel() {
     }
 
     init {
-        loadRecipe(recipeId = recipeId)
+        recipeId?.let { loadRecipe(it) }
     }
 
     private fun loadRecipe(recipeId: Int) {
@@ -35,7 +35,7 @@ class RecipeViewModel(context: Context, recipeId: Int) : ViewModel() {
         _recipeLiveData.value = RecipeState(
             recipe = loadedRecipe,
             isFavorite = isFavorite,
-            )
+        )
     }
 
     fun onFavoritesClicked() {

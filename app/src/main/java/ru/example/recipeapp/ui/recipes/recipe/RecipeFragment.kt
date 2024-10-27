@@ -26,11 +26,17 @@ class RecipeFragment : Fragment() {
         IngredientsAdapter(emptyList())
     }
 
-    private val recipeId by lazy {
-        arguments?.getInt(Constants.ARG_RECIPE)
+    private val recipeId: Int? by lazy {
+        val recipe: Recipe? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            arguments?.getParcelable(Constants.ARG_RECIPE)
+        }
+        recipe?.id
     }
     private val viewModel: RecipeViewModel by viewModels {
-        RecipeViewModelFactory(requireContext(), recipeId!!)
+        RecipeViewModelFactory(requireContext(), recipeId)
     }
 
     override fun onCreateView(
@@ -43,31 +49,21 @@ class RecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recipe = getRecipeFromArguments()
-        if (recipe != null) {
-            initUI(recipe)
-            initRecycler(recipe)
-            ingredientsAdapter.updateDataSet(recipe.ingredients)
-        } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.text_recipe_not_found),
-                Toast.LENGTH_SHORT
-            ).show()
+        viewModel.recipeLiveData.observe(viewLifecycleOwner) { stateRecipe ->
+            stateRecipe.recipe?.let { recipe ->
+                initUI(stateRecipe)
+                initRecycler(recipe)
+            } ?: run {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.text_recipe_not_found),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    private fun getRecipeFromArguments(): Recipe? {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            arguments?.getParcelable(Constants.ARG_RECIPE)
-        }
-    }
-
-    private fun initUI(recipe: Recipe) {
-        viewModel.recipeLiveData.observe(viewLifecycleOwner) {stateRecipe ->
+    private fun initUI(stateRecipe: RecipeState) {
         binding.tVHeader.text = stateRecipe.recipe?.title
         updateFavoriteIcon(stateRecipe.isFavorite)
         binding.tVPortionNum.text = stateRecipe.portionCount.toString()
@@ -79,14 +75,13 @@ class RecipeFragment : Fragment() {
             }
             binding.headerImage.setImageBitmap(imageResources)
             binding.headerImage.contentDescription = getString(
-                R.string.content_description_recipe_image, recipe.title
+                R.string.content_description_recipe_image, stateRecipe.recipe.title
             )
+
         }
-    }
         binding.imageHeartButton.setOnClickListener {
             viewModel.onFavoritesClicked()
         }
-
     }
 
     private fun updateFavoriteIcon(isFavorite: Boolean) {
@@ -98,6 +93,7 @@ class RecipeFragment : Fragment() {
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
+        ingredientsAdapter.updateDataSet(recipe.ingredients)
         binding.rvIngredients.adapter = ingredientsAdapter
         binding.rvMethod.adapter = MethodAdapter(recipe.method)
 
@@ -113,11 +109,9 @@ class RecipeFragment : Fragment() {
                 binding.tVPortionNum.text = progress.toString()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 
