@@ -49,10 +49,12 @@ class RecipeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUI()
+        initRecycler()
+
         viewModel.recipeLiveData.observe(viewLifecycleOwner) { stateRecipe ->
             stateRecipe.recipe?.let { recipe ->
-                initUI(stateRecipe)
-                initRecycler(recipe)
+                updateUIWithRecipe(stateRecipe)
             } ?: run {
                 Toast.makeText(
                     requireContext(),
@@ -63,7 +65,7 @@ class RecipeFragment : Fragment() {
         }
     }
 
-    private fun initUI(stateRecipe: RecipeState) {
+    private fun updateUIWithRecipe(stateRecipe: RecipeState) {
         binding.tVHeader.text = stateRecipe.recipe?.title
         updateFavoriteIcon(stateRecipe.isFavorite)
         binding.tVPortionNum.text = stateRecipe.portionCount.toString()
@@ -77,8 +79,13 @@ class RecipeFragment : Fragment() {
             binding.headerImage.contentDescription = getString(
                 R.string.content_description_recipe_image, stateRecipe.recipe.title
             )
-
         }
+        stateRecipe.recipe?.let { ingredientsAdapter.updateDataSet(it.ingredients) }
+        stateRecipe.recipe?.let { (binding.rvMethod.adapter as MethodAdapter).updateDataSet(it.method) }
+
+    }
+
+    private fun initUI() {
         binding.imageHeartButton.setOnClickListener {
             viewModel.onFavoritesClicked()
         }
@@ -89,13 +96,12 @@ class RecipeFragment : Fragment() {
         binding.imageHeartButton.setImageResource(iconResId)
     }
 
-    private fun initRecycler(recipe: Recipe) {
+    private fun initRecycler() {
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
-        ingredientsAdapter.updateDataSet(recipe.ingredients)
         binding.rvIngredients.adapter = ingredientsAdapter
-        binding.rvMethod.adapter = MethodAdapter(recipe.method)
+        binding.rvMethod.adapter = MethodAdapter(emptyList())
 
         val ingredientDivider = createDivider()
         val methodDivider = createDivider()
@@ -107,6 +113,7 @@ class RecipeFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 ingredientsAdapter.updateIngredients(progress)
                 binding.tVPortionNum.text = progress.toString()
+                viewModel.updatePortions(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}

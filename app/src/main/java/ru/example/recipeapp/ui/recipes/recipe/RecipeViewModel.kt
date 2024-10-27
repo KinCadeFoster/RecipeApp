@@ -63,4 +63,10 @@ class RecipeViewModel(context: Context, recipeId: Int?) : ViewModel() {
     private fun saveFavorites(favoriteIds: Set<String>) {
         sharedPrefs.edit().putStringSet(KEY_FAVORITE_RECIPES, favoriteIds).apply()
     }
+
+    fun updatePortions(portions: Int) {
+        _recipeLiveData.value?.let { currentRecipeState ->
+            _recipeLiveData.value = currentRecipeState.copy(portionCount = portions)
+        }
+    }
 }
