@@ -1,6 +1,5 @@
 package ru.example.recipeapp.ui.recipes.recipe
 
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -69,20 +68,12 @@ class RecipeFragment : Fragment() {
         binding.tVHeader.text = stateRecipe.recipe?.title
         updateFavoriteIcon(stateRecipe.isFavorite)
         binding.tVPortionNum.text = stateRecipe.portionCount.toString()
-
-        val recipeUrl = stateRecipe.recipe?.imageUrl
-        recipeUrl?.let {
-            val imageResources = requireContext().assets.open(it).use { inputStream ->
-                BitmapFactory.decodeStream(inputStream)
-            }
-            binding.headerImage.setImageBitmap(imageResources)
-            binding.headerImage.contentDescription = getString(
-                R.string.content_description_recipe_image, stateRecipe.recipe.title
-            )
-        }
+        binding.headerImage.setImageDrawable(stateRecipe.recipeImage)
+        binding.headerImage.contentDescription = getString(
+            R.string.content_description_recipe_image, stateRecipe.recipe?.title
+        )
         stateRecipe.recipe?.let { ingredientsAdapter.updateDataSet(it.ingredients) }
         stateRecipe.recipe?.let { (binding.rvMethod.adapter as MethodAdapter).updateDataSet(it.method) }
-
     }
 
     private fun initUI() {
