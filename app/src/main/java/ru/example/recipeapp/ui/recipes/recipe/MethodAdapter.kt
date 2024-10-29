@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.example.recipeapp.databinding.ItemMethodBinding
 
-class MethodAdapter(private val method: List<String>) :
+class MethodAdapter(private var method: List<String>) :
     RecyclerView.Adapter<MethodAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMethodBinding) :
@@ -23,4 +23,9 @@ class MethodAdapter(private val method: List<String>) :
     }
 
     override fun getItemCount() = method.size
+
+    fun updateDataSet(newMethods: List<String>) {
+        this.method = newMethods
+        notifyDataSetChanged()
+    }
 }
