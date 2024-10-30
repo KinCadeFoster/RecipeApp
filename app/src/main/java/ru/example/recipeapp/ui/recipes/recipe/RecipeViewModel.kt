@@ -1,6 +1,9 @@
 package ru.example.recipeapp.ui.recipes.recipe
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +16,7 @@ data class RecipeState(
     val recipe: Recipe? = null,
     val isFavorite: Boolean = false,
     val portionCount: Int = 1,
+    val recipeImage: Drawable? = null,
 )
 
 class RecipeViewModel(context: Context, recipeId: Int?) : ViewModel() {
@@ -24,17 +28,22 @@ class RecipeViewModel(context: Context, recipeId: Int?) : ViewModel() {
     }
 
     init {
-        recipeId?.let { loadRecipe(it) }
+        recipeId?.let { loadRecipe(it, context) }
     }
 
-    private fun loadRecipe(recipeId: Int) {
+    private fun loadRecipe(recipeId: Int, context: Context) {
         // TODO: load from network
         val loadedRecipe = getRecipeById(recipeId)
         val isFavorite = recipeId.toString() in getFavorites()
-
+        val recipeImage = loadedRecipe?.imageUrl?.let { imageUrl ->
+            context.assets.open(imageUrl).use { inputStream ->
+                BitmapDrawable(context.resources, BitmapFactory.decodeStream(inputStream))
+            }
+        }
         _recipeLiveData.value = RecipeState(
             recipe = loadedRecipe,
             isFavorite = isFavorite,
+            recipeImage = recipeImage
         )
     }
 
