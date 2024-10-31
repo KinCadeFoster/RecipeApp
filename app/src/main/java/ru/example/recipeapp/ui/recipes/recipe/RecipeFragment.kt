@@ -47,12 +47,9 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initUI()
-        initRecycler()
-
         viewModel.recipeLiveData.observe(viewLifecycleOwner) { stateRecipe ->
-            stateRecipe.recipe?.let { recipe ->
+            stateRecipe.recipe?.let {
                 updateUIWithRecipe(stateRecipe)
             } ?: run {
                 Toast.makeText(
@@ -62,6 +59,7 @@ class RecipeFragment : Fragment() {
                 ).show()
             }
         }
+
     }
 
     private fun updateUIWithRecipe(stateRecipe: RecipeState) {
@@ -80,14 +78,7 @@ class RecipeFragment : Fragment() {
         binding.imageHeartButton.setOnClickListener {
             viewModel.onFavoritesClicked()
         }
-    }
 
-    private fun updateFavoriteIcon(isFavorite: Boolean) {
-        val iconResId = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
-        binding.imageHeartButton.setImageResource(iconResId)
-    }
-
-    private fun initRecycler() {
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
@@ -111,6 +102,11 @@ class RecipeFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+    }
+
+    private fun updateFavoriteIcon(isFavorite: Boolean) {
+        val iconResId = if (isFavorite) R.drawable.ic_heart else R.drawable.ic_heart_empty
+        binding.imageHeartButton.setImageResource(iconResId)
     }
 
     private fun createDivider(): MaterialDividerItemDecoration {
