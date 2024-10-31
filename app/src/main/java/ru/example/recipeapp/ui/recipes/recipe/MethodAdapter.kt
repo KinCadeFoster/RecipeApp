@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.example.recipeapp.databinding.ItemMethodBinding
 
-class MethodAdapter(private var method: List<String>) :
+class MethodAdapter(var dataSet: List<String>) :
     RecyclerView.Adapter<MethodAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMethodBinding) :
@@ -18,14 +18,14 @@ class MethodAdapter(private var method: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val text = "${position + 1}. ${method[position]}"
+        val text = "${position + 1}. ${dataSet[position]}"
         holder.binding.tvStep.text = text
     }
 
-    override fun getItemCount() = method.size
+    override fun getItemCount() = dataSet.size
 
     fun updateDataSet(newMethods: List<String>) {
-        this.method = newMethods
+        this.dataSet = newMethods
         notifyDataSetChanged()
     }
 }

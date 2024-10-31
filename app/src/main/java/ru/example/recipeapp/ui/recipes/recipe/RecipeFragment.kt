@@ -25,6 +25,10 @@ class RecipeFragment : Fragment() {
         IngredientsAdapter(emptyList())
     }
 
+    private val methodAdapter by lazy {
+        MethodAdapter(emptyList())
+    }
+
     private val recipeId: Int? by lazy {
         val recipe: Recipe? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelable(Constants.ARG_RECIPE, Recipe::class.java)
@@ -58,6 +62,10 @@ class RecipeFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+            ingredientsAdapter.updateDataSet(stateRecipe.recipe?.ingredients ?: emptyList())
+            methodAdapter.updateDataSet(stateRecipe.recipe?.method ?: emptyList())
+
+            binding.tVPortionNum.text = stateRecipe.portionCount.toString()
         }
 
     }
@@ -65,7 +73,6 @@ class RecipeFragment : Fragment() {
     private fun updateUIWithRecipe(stateRecipe: RecipeState) {
         binding.tVHeader.text = stateRecipe.recipe?.title
         updateFavoriteIcon(stateRecipe.isFavorite)
-        binding.tVPortionNum.text = stateRecipe.portionCount.toString()
         binding.headerImage.setImageDrawable(stateRecipe.recipeImage)
         binding.headerImage.contentDescription = getString(
             R.string.content_description_recipe_image, stateRecipe.recipe?.title
@@ -91,17 +98,11 @@ class RecipeFragment : Fragment() {
         binding.rvIngredients.addItemDecoration(ingredientDivider)
         binding.rvMethod.addItemDecoration(methodDivider)
 
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        binding.seekBar.setOnSeekBarChangeListener(
+            PortionSeekBarListener { progress ->
                 ingredientsAdapter.updateIngredients(progress)
-                binding.tVPortionNum.text = progress.toString()
                 viewModel.updatePortions(progress)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+            })
     }
 
     private fun updateFavoriteIcon(isFavorite: Boolean) {
@@ -122,4 +123,17 @@ class RecipeFragment : Fragment() {
             isLastItemDecorated = false
         }
     }
+}
+
+class PortionSeekBarListener(
+    private val onChangeIngredients: (Int) -> Unit
+) : SeekBar.OnSeekBarChangeListener {
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        onChangeIngredients(progress)
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 }
