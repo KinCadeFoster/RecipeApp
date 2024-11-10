@@ -1,13 +1,14 @@
 package ru.example.recipeapp.ui.recipes.recipe
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -23,6 +24,9 @@ class RecipeFragment : Fragment() {
     }
     private val ingredientsAdapter by lazy {
         IngredientsAdapter(emptyList())
+    }
+    private val methodAdapter by lazy {
+        MethodAdapter(emptyList())
     }
 
     private val recipeId: Int? by lazy {
@@ -45,12 +49,25 @@ class RecipeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
         viewModel.recipeLiveData.observe(viewLifecycleOwner) { stateRecipe ->
             stateRecipe.recipe?.let {
-                updateUIWithRecipe(stateRecipe)
+                binding.tVHeader.text = stateRecipe.recipe.title
+                updateFavoriteIcon(stateRecipe.isFavorite)
+
+                binding.seekBar.progress = stateRecipe.portionCount
+                binding.tVPortionNum.text = stateRecipe.portionCount.toString()
+
+                binding.headerImage.setImageDrawable(stateRecipe.recipeImage)
+                binding.headerImage.contentDescription = getString(
+                    R.string.content_description_recipe_image, stateRecipe.recipe.title
+                )
+
+                ingredientsAdapter.updateDataSet(it.ingredients)
+                methodAdapter.updateDataSet(it.method)
             } ?: run {
                 Toast.makeText(
                     requireContext(),
@@ -62,18 +79,6 @@ class RecipeFragment : Fragment() {
 
     }
 
-    private fun updateUIWithRecipe(stateRecipe: RecipeState) {
-        binding.tVHeader.text = stateRecipe.recipe?.title
-        updateFavoriteIcon(stateRecipe.isFavorite)
-        binding.tVPortionNum.text = stateRecipe.portionCount.toString()
-        binding.headerImage.setImageDrawable(stateRecipe.recipeImage)
-        binding.headerImage.contentDescription = getString(
-            R.string.content_description_recipe_image, stateRecipe.recipe?.title
-        )
-        stateRecipe.recipe?.let { ingredientsAdapter.updateDataSet(it.ingredients) }
-        stateRecipe.recipe?.let { (binding.rvMethod.adapter as MethodAdapter).updateDataSet(it.method) }
-    }
-
     private fun initUI() {
         binding.imageHeartButton.setOnClickListener {
             viewModel.onFavoritesClicked()
@@ -83,7 +88,7 @@ class RecipeFragment : Fragment() {
         binding.rvMethod.layoutManager = LinearLayoutManager(requireContext())
 
         binding.rvIngredients.adapter = ingredientsAdapter
-        binding.rvMethod.adapter = MethodAdapter(emptyList())
+        binding.rvMethod.adapter = methodAdapter
 
         val ingredientDivider = createDivider()
         val methodDivider = createDivider()
@@ -94,7 +99,6 @@ class RecipeFragment : Fragment() {
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 ingredientsAdapter.updateIngredients(progress)
-                binding.tVPortionNum.text = progress.toString()
                 viewModel.updatePortions(progress)
             }
 

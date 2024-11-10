@@ -8,17 +8,20 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import ru.example.recipeapp.R
 import ru.example.recipeapp.databinding.FragmentListCategoriesBinding
-import ru.example.recipeapp.data.STUB
+import ru.example.recipeapp.model.Category
 import ru.example.recipeapp.ui.Constants
 import ru.example.recipeapp.ui.recipes.recipe_list.RecipesListFragment
 
-
 class CategoriesListFragment : Fragment() {
+
     private val binding by lazy {
         FragmentListCategoriesBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: CategoriesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +32,14 @@ class CategoriesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+
+        viewModel.categories.observe(viewLifecycleOwner) { categories ->
+            initRecycler(categories)
+        }
     }
 
-
-    private fun initRecycler() {
-        val categoriesAdapter = CategoriesListAdapter(STUB.getCategories())
+    private fun initRecycler(categories: List<Category>) {
+        val categoriesAdapter = CategoriesListAdapter(categories)
         binding.rvCategories.adapter = categoriesAdapter
 
         categoriesAdapter.setOnItemClickListener(object :
@@ -46,7 +51,7 @@ class CategoriesListFragment : Fragment() {
     }
 
     private fun openRecipesByCategoryId(categoryId: Int) {
-        STUB.getCategories().find { it.id == categoryId }?.let { category ->
+        viewModel.categories.value?.find { it.id == categoryId }?.let { category ->
             val categoryName = category.title
             val categoryImageUrl = category.imageUrl
 

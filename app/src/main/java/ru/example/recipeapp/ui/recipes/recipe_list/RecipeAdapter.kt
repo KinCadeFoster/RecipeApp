@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.example.recipeapp.databinding.ItemRecipeBinding
 import ru.example.recipeapp.model.Recipe
 
-class RecipeAdapter(private val dataSet: List<Recipe>) :
+class RecipeAdapter(private var dataSet: List<Recipe>) :
     RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -50,4 +50,9 @@ class RecipeAdapter(private val dataSet: List<Recipe>) :
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun updateDataSet(newDataSet: List<Recipe>) {
+        dataSet = newDataSet
+        notifyDataSetChanged()
+    }
 }
