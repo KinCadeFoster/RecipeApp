@@ -1,28 +1,36 @@
 package ru.example.recipeapp.ui.recipes.recipe_list
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.example.recipeapp.data.STUB
+import ru.example.recipeapp.model.Category
 import ru.example.recipeapp.model.Recipe
 
 
+data class RecipeCategoryState(
+    val recipes: List<Recipe> = emptyList(),
+    val category: Category? = null,
+    val categoryImage: Drawable? = null,
+)
+
 class RecipesListViewModel : ViewModel() {
+    private val _state = MutableLiveData<RecipeCategoryState>()
+    val state: LiveData<RecipeCategoryState> get() = _state
 
-    private val _recipes = MutableLiveData<List<Recipe>>()
-    val recipes: LiveData<List<Recipe>> get() = _recipes
-
-    private val _categoryName = MutableLiveData<String?>()
-    val categoryName: MutableLiveData<String?> get() = _categoryName
-
-    private val _categoryImageUrl = MutableLiveData<String?>()
-    val categoryImageUrl: MutableLiveData<String?> get() = _categoryImageUrl
-
-    fun loadCategoryData(categoryId: Int?, categoryName: String?, categoryImageUrl: String?) {
-        categoryId?.let {
-            _recipes.value = STUB.getRecipesByCategoryId(it)
+    fun loadCategoryData(category: Category?, context: Context) {
+        category?.let {
+            val recipes = STUB.getRecipesByCategoryId(it.id)
+            val categoryImage = it.imageUrl.let { imageUrl ->
+                context.assets.open(imageUrl).use { inputStream ->
+                    BitmapDrawable(context.resources, BitmapFactory.decodeStream(inputStream))
+                }
+            }
+            _state.value = RecipeCategoryState(recipes = recipes, category = it, categoryImage = categoryImage)
         }
-        _categoryName.value = categoryName
-        _categoryImageUrl.value = categoryImageUrl
     }
 }

@@ -45,13 +45,13 @@ class CategoriesListFragment : Fragment() {
         categoriesAdapter.setOnItemClickListener(object :
             CategoriesListAdapter.OnItemClickListener {
             override fun onItemClick(categoryId: Int) {
-                openRecipesByCategoryId(categoryId)
+                openRecipesByCategoryId(categoryId, categories)
             }
         })
     }
 
-    private fun openRecipesByCategoryId(categoryId: Int) {
-        viewModel.categories.value?.find { it.id == categoryId }?.let { category ->
+    private fun openRecipesByCategoryId(categoryId: Int, categories: List<Category>) {
+        categories.find { it.id == categoryId }?.let { category ->
             val categoryName = category.title
             val categoryImageUrl = category.imageUrl
 
